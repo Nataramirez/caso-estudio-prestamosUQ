@@ -7,26 +7,29 @@ public class PrestamoUq {
     private String nombre;
     List<Cliente> listaClientes = new ArrayList<>();
 
+    List<Empleado> listaEmpleados = new ArrayList<>();
+
     public PrestamoUq(String nombre) {
         this.nombre = nombre;
     }
 
     public PrestamoUq(){}
 
-    public String getNombre() {
-        return nombre;
-    }
+    // GET AND SET //
+    public String getNombre() { return nombre; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public List<Cliente> getListaClientes() {
-        return listaClientes;
-    }
+    public List<Cliente> getListaClientes() { return listaClientes; }
+
+    public List<Empleado> getListaEmpleados() { return listaEmpleados; }
 
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
+    }
+
+    public void setListaEmpleados(List<Empleado> listaEmpleados) {
+        this.listaEmpleados = listaEmpleados;
     }
 
     /**
@@ -95,5 +98,45 @@ public class PrestamoUq {
                 "nombre='" + nombre + '\'' +
                 '}';
     }
+
+    // LISTA EMPLEADOS //
+
+    /**
+     * Método para crear un empleado
+     * @param nombre
+     * @param apellido
+     * @param cedula
+     * @param edad
+     * @return boolean
+     */
+    public boolean crearEmpleado(String nombre, String apellido, String cedula, double edad){
+        Empleado empleado = new Empleado(nombre, apellido, cedula, edad);
+        getListaEmpleados().add(empleado);
+        return true;
+    }
+
+    /**
+     * Método para obtener un listado de empleados
+     * @return listaEmpleados
+     */
+    public List<Empleado> obtenerEmpleados() {
+        return getListaEmpleados();
+    }
+
+    /**
+     * Método para eliminar un empleado de la lista
+     * @param cedula
+     */
+    public void eliminarEmpleado(String cedula) {
+        int tamanioLista = getListaClientes().size();
+        for(int i = 0; i < tamanioLista; i++){
+            Empleado empleado = getListaEmpleados().get(i);
+            if(empleado.getCedula().equalsIgnoreCase(cedula)){
+                getListaEmpleados().remove(i);
+                break;
+            }
+        }
+    }
+
 
 }
