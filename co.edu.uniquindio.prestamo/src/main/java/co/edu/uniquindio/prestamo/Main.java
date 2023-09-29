@@ -12,6 +12,8 @@ public class Main {
         crearCiente("andres", "miranda", "1095", 28, prestamoUq);
         crearCiente("sara", "morales", "1096", 31, prestamoUq);
         crearCiente("luis", "castro", "1097", 26, prestamoUq);
+        crearCiente("sara", "morales", "1096", 31, prestamoUq);
+        crearCiente("luis", "castro", "1097", 26, prestamoUq);
         mostrarInformacionClientes(prestamoUq);
         eliminarCliente(prestamoUq, "1095");
         System.out.println("--------> Lista de clientes después de eliminar cliente <-------");
