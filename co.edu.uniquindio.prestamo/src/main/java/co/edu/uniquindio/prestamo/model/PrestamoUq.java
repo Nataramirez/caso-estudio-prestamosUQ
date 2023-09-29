@@ -41,10 +41,14 @@ public class PrestamoUq {
      * @return boolean
      */
     public boolean crearCliente(String nombre, String apellido, String cedula, double edad){
-        Cliente cliente = new Cliente(nombre, apellido, cedula, edad);
-        getListaClientes().add(cliente);
-        return true;
+        if (!buscarCliente(cedula)) {
+            Cliente cliente = new Cliente(nombre, apellido, cedula, edad);
+            getListaClientes().add(cliente);
+            return true;
+        }else {
+            return false;}
     }
+
 
     /**
      * Método para obtener un listado de clientes
@@ -69,6 +73,25 @@ public class PrestamoUq {
         }
     }
 
+    /**
+     * Método para determinar si un cliente existe en la base de datos
+     * @return boolean
+     */
+    public boolean buscarCliente(String cedula) {
+        int tamanioLista = getListaClientes().size();
+        boolean clienteExiste = false;
+        for(int i = 0; i < tamanioLista; i++){
+            Cliente cliente = getListaClientes().get(i);
+            if(cliente.getCedula().equalsIgnoreCase(cedula)){
+                clienteExiste = true;
+                System.out.println("El cliente con cédula " + cedula + " ya existe, no es posible crear de nuevo");
+                break;
+            }
+        }
+        return clienteExiste;
+    }
+
+   
     @Override
     public String toString() {
         return "PrestamoUq{" +

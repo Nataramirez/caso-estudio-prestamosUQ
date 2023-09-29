@@ -14,13 +14,14 @@ public class Main {
         crearCiente("andres", "miranda", "1095", 28, prestamoUq);
         crearCiente("sara", "morales", "1096", 31, prestamoUq);
         crearCiente("luis", "castro", "1097", 26, prestamoUq);
+        crearCiente("sara", "morales", "1096", 31, prestamoUq);
+        crearCiente("luis", "castro", "1097", 26, prestamoUq);
 
         // CREAR EMPLEADOS
         crearEmpleado("Nicolás", "Upegui", "1098", 42, prestamoUq);
         crearEmpleado("Jerónimo", "Osorio", "1099", 26, prestamoUq);
         crearEmpleado("Augusto", "Álvarez", "1001", 54, prestamoUq);
         crearEmpleado("Camilo", "Marulanda", "1002", 18, prestamoUq);
-
         System.out.println("--------> Lista de clientes <-------");
         mostrarInformacionClientes(prestamoUq);
         eliminarCliente(prestamoUq, "1095");
