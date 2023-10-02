@@ -40,6 +40,13 @@ public enum Crud {
                     Crud.UPDATE.getNombre() + "empleado",
                     Crud.DELETE.getNombre() + "empleado",
             };
+        } else if (proceso.equalsIgnoreCase(Proceso.PRESTAMO.getNombre())) {
+            tipoCrud = new String[] {
+                    Crud.CREATE.getNombre() + "prestamo",
+                    Crud.READ.getNombre() + "prestamos",
+                    Crud.UPDATE.getNombre() + "prestamo",
+                    Crud.DELETE.getNombre() + "prestamo",
+            };
         }
         return tipoCrud;
     }

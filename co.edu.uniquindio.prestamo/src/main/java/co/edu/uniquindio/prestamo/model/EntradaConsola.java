@@ -118,6 +118,49 @@ public class EntradaConsola {
                 return cerrar;
             }
         }
+        if (proceso.equals(Proceso.PRESTAMO.getNombre())){
+            while(cerrar == 1){
+                Integer numeroPrestamo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número del préstamo"));
+                int cerrarAplicacionNumeroPrestamo = cerrarApliacionInt(numeroPrestamo);
+                if(cerrarAplicacionNumeroPrestamo == 0){
+                    cerrar = cerrarAplicacionNumeroPrestamo;
+                    return cerrar;
+                } else if (cerrarAplicacionNumeroPrestamo == 1 && numeroPrestamo == null) {
+                    numeroPrestamo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número del préstamo"));
+                    cerrarAplicacionNumeroPrestamo = cerrarApliacionInt(numeroPrestamo);
+                }
+                String fechaPrestamo = JOptionPane.showInputDialog("Ingrese la fecha del Prestamo");
+                int cerrarAplicacionFechaPrestamo = cerrarApliacionString(fechaPrestamo);
+                if(cerrarAplicacionFechaPrestamo == 0){
+                    cerrar = cerrarAplicacionFechaPrestamo;
+                    return cerrar;
+                } else if (cerrarAplicacionFechaPrestamo == 1 && fechaPrestamo == null) {
+                    fechaPrestamo = JOptionPane.showInputDialog("Ingrese la fecha del Prestamo");
+                    cerrarAplicacionFechaPrestamo = cerrarApliacionString(fechaPrestamo);
+                }
+                String fechaEntrega = JOptionPane.showInputDialog("Ingrese fecha de entrega");
+                int cerrarAplicacionFechaEntrega = cerrarApliacionString(fechaEntrega);
+                if(cerrarAplicacionFechaEntrega == 0){
+                    cerrar = cerrarAplicacionFechaEntrega;
+                    return cerrar;
+                } else if (cerrarAplicacionFechaEntrega == 1 && fechaEntrega == null) {
+                    fechaEntrega = JOptionPane.showInputDialog("Ingrese fecha de entrega");
+                    cerrarAplicacionFechaEntrega = cerrarApliacionString(fechaEntrega);
+                }
+                String descripcion = JOptionPane.showInputDialog("Ingrese descripción");
+                int cerrarAplicacionDescripcion = cerrarApliacionString(descripcion);
+                if(cerrarAplicacionDescripcion == 0){
+                    cerrar = cerrarAplicacionDescripcion;
+                    return cerrar;
+                } else if (cerrarAplicacionDescripcion == 1 && descripcion == null) {
+                    descripcion = JOptionPane.showInputDialog("Ingrese descripción");
+                    cerrarAplicacionDescripcion = cerrarApliacionString(descripcion);
+                }
+                PrestamoUq.crearPrestamo(numeroPrestamo, fechaPrestamo, fechaEntrega, descripcion);
+                cerrar = cerrarAplicacion();
+                return cerrar;
+            }
+        }
         return cerrar;
     }
 
@@ -137,6 +180,14 @@ public class EntradaConsola {
             }
             cerrar = cerrarAplicacion();
         }
+        if(proceso.equals(Proceso.PRESTAMO.getNombre())){
+            List<Prestamo> listaPrestamos =  PrestamoUq.getListaPrestamos();
+            for(int i = 0; i < listaPrestamos.size(); i++){
+                JOptionPane.showMessageDialog(null,listaPrestamos.get(i).toString());
+            }
+            cerrar = cerrarAplicacion();
+        }
+
         return cerrar;
     }
 
@@ -166,6 +217,18 @@ public class EntradaConsola {
 
             }
         }
+        if(proceso.equals(Proceso.PRESTAMO.getNombre())){
+            String prestamo = JOptionPane.showInputDialog("Ingrese número de prestamo que desea eliminar");
+            if(prestamo != null){
+                boolean empleadoEliminado = PrestamoUq.eliminarEmpleado(prestamo);
+                if(empleadoEliminado){
+                    JOptionPane.showMessageDialog(null,"El prestamo ha sido eliminado");
+                }else {
+                    JOptionPane.showMessageDialog(null,"El prestamo NO ha ha sido encontrado");
+                }
+
+            }
+        }
         return cerrar;
     }
 
@@ -187,6 +250,21 @@ public class EntradaConsola {
     public static int cerrarApliacionDouble(Double dato){
         int cerrar = 1;
         if(dato instanceof Double){
+            return cerrar;
+        }else {
+            int respuestaCerrar = JOptionPane.showConfirmDialog(null,
+                    "¿Desea cerrar la aplicación?",
+                    "Alerta!",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
+            cerrar = respuestaCerrar;
+            return cerrar;
+        }
+    }
+
+    public static int cerrarApliacionInt(Integer dato){
+        int cerrar = 1;
+        if(dato instanceof Integer){
             return cerrar;
         }else {
             int respuestaCerrar = JOptionPane.showConfirmDialog(null,

@@ -2,7 +2,8 @@ package co.edu.uniquindio.prestamo.enums;
 
 public enum Proceso {
     CLIENTE("Clientes"),
-    EMPLEADO("Empleados");
+    EMPLEADO("Empleados"),
+    PRESTAMO("Prestamo");
     private String nombre;
 
     public String getNombre() {
@@ -17,6 +18,7 @@ public enum Proceso {
         String[] proceso = {
                 Proceso.CLIENTE.getNombre(),
                 Proceso.EMPLEADO.getNombre(),
+                Proceso.PRESTAMO.getNombre(),
         };
         return proceso;
     }

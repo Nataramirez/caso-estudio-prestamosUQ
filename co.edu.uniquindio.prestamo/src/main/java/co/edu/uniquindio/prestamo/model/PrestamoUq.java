@@ -9,7 +9,7 @@ public class PrestamoUq {
 
     public static List<Empleado> listaEmpleados = new ArrayList<>();
 
-    List<Prestamo> listaPrestamos = new ArrayList<>();
+    public static List<Prestamo> listaPrestamos = new ArrayList<>();
 
     public PrestamoUq(String nombre) {
         this.nombre = nombre;
@@ -31,7 +31,7 @@ public class PrestamoUq {
 
     public void setListaEmpleados(List<Empleado> listaEmpleados) { this.listaEmpleados = listaEmpleados; }
 
-    public List<Prestamo> getListaPrestamos() { return listaPrestamos; }
+    public static List<Prestamo> getListaPrestamos() { return listaPrestamos; }
 
     public void setListaPrestamos(List<Prestamo> listaPrestamos) { this.listaPrestamos = listaPrestamos; }
 
@@ -177,7 +177,7 @@ public class PrestamoUq {
      * @param descripcion
      * @return boolean
      */
-    public boolean crearPrestamo(int numeroPrestamo, String fechaPrestamo, String fechaEntrega, String descripcion)
+    public static boolean crearPrestamo(int numeroPrestamo, String fechaPrestamo, String fechaEntrega, String descripcion)
     {
         Prestamo prestamo = new Prestamo(numeroPrestamo, fechaPrestamo, fechaEntrega, descripcion);
         getListaPrestamos().add(prestamo);
@@ -196,15 +196,18 @@ public class PrestamoUq {
      * Método para eliminar un prestasmo de la lista
      * @param numeroPrestamo
      */
-    public void eliminarPrestamo(int numeroPrestamo) {
+    public static boolean eliminarPrestamo(int numeroPrestamo) {
         int tamanioLista = getListaPrestamos().size();
+        boolean prestamoExiste = false;
         for(int i = 0; i < tamanioLista; i++){
             Prestamo prestamo = getListaPrestamos().get(i);
             if(prestamo.getNumeroPrestamo()==numeroPrestamo){
                 getListaPrestamos().remove(i);
+                prestamoExiste = true;
                 break;
             }
         }
+        return prestamoExiste;
     }
 
     /**
