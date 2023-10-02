@@ -1,6 +1,8 @@
 package co.edu.uniquindio.prestamo;
 
+import co.edu.uniquindio.prestamo.enums.Crud;
 import co.edu.uniquindio.prestamo.model.Cliente;
+import co.edu.uniquindio.prestamo.model.EntradaConsola;
 import co.edu.uniquindio.prestamo.model.PrestamoUq;
 import co.edu.uniquindio.prestamo.model.Empleado;
 import co.edu.uniquindio.prestamo.model.Prestamo;
@@ -63,13 +65,24 @@ public class Main {
         actualizarEmpleado(prestamoUq,"1098");
         System.out.println("\n--------> Lista de empleados después de eliminar y actualizar empleados <-------\n");
         mostrarInformacionEmpleados(prestamoUq);
-
         System.out.println("\n--------> Lista de prestamos <-------\n");
         mostrarInformacionPrestamos(prestamoUq);
         eliminarPrestamo(prestamoUq, 10);
         actualizarPrestamo(prestamoUq,15);
         System.out.println("\n--------> Lista de prestamos después de eliminar y actualizar prestamos <-------\n");
         mostrarInformacionPrestamos(prestamoUq);
+        int ejecutarAplicacion = 1;
+        while (ejecutarAplicacion == 1){
+            String tipoProceso = EntradaConsola.tipoProceso();
+            ejecutarAplicacion = EntradaConsola.cerrarApliacionString(tipoProceso);
+            if(tipoProceso != null){
+                String tipoCrud = EntradaConsola.tipoCrud(tipoProceso);
+                ejecutarAplicacion = EntradaConsola.cerrarApliacionString(tipoCrud);
+                if(tipoCrud != null){
+                    ejecutarAplicacion = ejecutarCrud(tipoProceso, tipoCrud);
+                }
+            }
+        }
     }
 
     /**
@@ -175,6 +188,25 @@ public class Main {
      */
     private static void eliminarEmpleado(PrestamoUq prestamoUq, String cedula) {
         prestamoUq.eliminarEmpleado(cedula);
+    }
+
+
+    private static int ejecutarCrud(String proceso, String crud){
+        int cerrarAplicacion = 1;
+        if(crud.contains(Crud.CREATE.getNombre())){
+            cerrarAplicacion = EntradaConsola.crear(proceso);
+        }
+        if(crud.contains(Crud.READ.getNombre())){
+            cerrarAplicacion = EntradaConsola.leer(proceso);
+        }
+        if(crud.contains(Crud.DELETE.getNombre())){
+            cerrarAplicacion = EntradaConsola.eliminar(proceso);
+        }
+        /*
+
+        if(crud.contains(Crud.UPDATE.getNombre())){}
+        */
+        return cerrarAplicacion;
     }
 
     /**
