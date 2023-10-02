@@ -9,11 +9,14 @@ public class PrestamoUq {
 
     List<Empleado> listaEmpleados = new ArrayList<>();
 
+    List<Prestamo> listaPrestamos = new ArrayList<>();
+
     public PrestamoUq(String nombre) {
         this.nombre = nombre;
     }
 
     public PrestamoUq(){}
+
 
     // GET AND SET //
     public String getNombre() { return nombre; }
@@ -24,13 +27,13 @@ public class PrestamoUq {
 
     public List<Empleado> getListaEmpleados() { return listaEmpleados; }
 
-    public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
-    }
+    public void setListaClientes(List<Cliente> listaClientes) { this.listaClientes = listaClientes; }
 
-    public void setListaEmpleados(List<Empleado> listaEmpleados) {
-        this.listaEmpleados = listaEmpleados;
-    }
+    public void setListaEmpleados(List<Empleado> listaEmpleados) { this.listaEmpleados = listaEmpleados; }
+
+    public List<Prestamo> getListaPrestamos() { return listaPrestamos; }
+
+    public void setListaPrestamos(List<Prestamo> listaPrestamos) { this.listaPrestamos = listaPrestamos; }
 
     /**
      * Método para crear un cliente
@@ -48,7 +51,6 @@ public class PrestamoUq {
         }else {
             return false;}
     }
-
 
     /**
      * Método para obtener un listado de clientes
@@ -74,7 +76,8 @@ public class PrestamoUq {
     }
 
     /**
-     * Método para determinar si un cliente existe en la base de datos
+     * Método para determinar si un cliente existe en la base de datos.
+     * @param cedula
      * @return boolean
      */
     public boolean buscarCliente(String cedula) {
@@ -89,6 +92,26 @@ public class PrestamoUq {
             }
         }
         return clienteExiste;
+    }
+
+    /**
+     * Método para determinar si un empleado existe en la base de datos.
+     * @param cedula
+     * @return boolean
+     */
+
+    public boolean buscarEmpleado(String cedula) {
+        int tamanioLista = getListaEmpleados().size();
+        boolean empleadoExiste = false;
+        for(int i = 0; i < tamanioLista; i++){
+            Empleado empleado = getListaEmpleados().get(i);
+            if(empleado.getCedula().equalsIgnoreCase(cedula)){
+                empleadoExiste = true;
+                System.out.println("El empleado con cédula " + cedula + " ya existe, no es posible crear de nuevo");
+                break;
+            }
+        }
+        return empleadoExiste;
     }
 
    
@@ -138,5 +161,63 @@ public class PrestamoUq {
         }
     }
 
+    // LISTA PRESTAMOS //
 
+    /**
+     * Método para crear un prestamo
+     * @param numeroPrestamo
+     * @param fechaPrestamo
+     * @param fechaEntrega
+     * @param descripcion
+     * @return boolean
+     */
+    public boolean crearPrestamo(int numeroPrestamo, String fechaPrestamo, String fechaEntrega, String descripcion)
+    {
+        Prestamo prestamo = new Prestamo(numeroPrestamo, fechaPrestamo, fechaEntrega, descripcion);
+        getListaPrestamos().add(prestamo);
+        return true;
+    }
+
+    /**
+     * Método para obtener un listado de prestamos
+     * @return listaPrestamos
+     */
+    public List<Prestamo> obtenerPrestamos() {
+        return getListaPrestamos();
+    }
+
+    /**
+     * Método para eliminar un prestasmo de la lista
+     * @param numeroPrestamo
+     */
+    public void eliminarPrestamo(int numeroPrestamo) {
+        int tamanioLista = getListaPrestamos().size();
+        for(int i = 0; i < tamanioLista; i++){
+            Prestamo prestamo = getListaPrestamos().get(i);
+            if(prestamo.getNumeroPrestamo()==numeroPrestamo){
+                getListaPrestamos().remove(i);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Método para determinar si un préstamo existe en la base de datos.
+     * @param numeroPrestamo
+     * @return boolean
+     */
+
+    public boolean buscarPrestamo(int numeroPrestamo) {
+        int tamanioLista = getListaPrestamos().size();
+        boolean prestamoExiste = false;
+        for(int i = 0; i < tamanioLista; i++){
+            Prestamo prestamo = getListaPrestamos().get(i);
+            if(prestamo.getNumeroPrestamo()==numeroPrestamo){
+                prestamoExiste = true;
+                System.out.println("El préstamo número " + numeroPrestamo + " ya existe, no es posible crear de nuevo");
+                break;
+            }
+        }
+        return prestamoExiste;
+    }
 }
