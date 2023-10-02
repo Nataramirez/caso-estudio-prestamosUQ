@@ -5,9 +5,9 @@ import java.util.List;
 
 public class PrestamoUq {
     private String nombre;
-    List<Cliente> listaClientes = new ArrayList<>();
+    public static List<Cliente> listaClientes = new ArrayList<>();
 
-    List<Empleado> listaEmpleados = new ArrayList<>();
+    public static List<Empleado> listaEmpleados = new ArrayList<>();
 
     public PrestamoUq(String nombre) {
         this.nombre = nombre;
@@ -20,9 +20,9 @@ public class PrestamoUq {
 
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public List<Cliente> getListaClientes() { return listaClientes; }
+    public static List<Cliente> getListaClientes() { return listaClientes; }
 
-    public List<Empleado> getListaEmpleados() { return listaEmpleados; }
+    public static List<Empleado> getListaEmpleados() { return listaEmpleados; }
 
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
@@ -40,7 +40,7 @@ public class PrestamoUq {
      * @param edad
      * @return boolean
      */
-    public boolean crearCliente(String nombre, String apellido, String cedula, double edad){
+    public static boolean crearCliente(String nombre, String apellido, String cedula, double edad){
         if (!buscarCliente(cedula)) {
             Cliente cliente = new Cliente(nombre, apellido, cedula, edad);
             getListaClientes().add(cliente);
@@ -54,7 +54,7 @@ public class PrestamoUq {
      * Método para obtener un listado de clientes
      * @return listaClientes
      */
-    public List<Cliente> obtenerClientes() {
+    public static List<Cliente> obtenerClientes() {
         return getListaClientes();
     }
 
@@ -62,7 +62,7 @@ public class PrestamoUq {
      * Método para eliminar un cliente de la lista
      * @param cedula
      */
-    public void eliminarCliente(String cedula) {
+    public static void eliminarCliente(String cedula) {
         int tamanioLista = getListaClientes().size();
         for(int i = 0; i < tamanioLista; i++){
             Cliente cliente = getListaClientes().get(i);
@@ -77,7 +77,7 @@ public class PrestamoUq {
      * Método para determinar si un cliente existe en la base de datos
      * @return boolean
      */
-    public boolean buscarCliente(String cedula) {
+    public static boolean buscarCliente(String cedula) {
         int tamanioLista = getListaClientes().size();
         boolean clienteExiste = false;
         for(int i = 0; i < tamanioLista; i++){
@@ -109,7 +109,7 @@ public class PrestamoUq {
      * @param edad
      * @return boolean
      */
-    public boolean crearEmpleado(String nombre, String apellido, String cedula, double edad){
+    public static boolean crearEmpleado(String nombre, String apellido, String cedula, double edad){
         Empleado empleado = new Empleado(nombre, apellido, cedula, edad);
         getListaEmpleados().add(empleado);
         return true;
@@ -127,7 +127,7 @@ public class PrestamoUq {
      * Método para eliminar un empleado de la lista
      * @param cedula
      */
-    public void eliminarEmpleado(String cedula) {
+    public static void eliminarEmpleado(String cedula) {
         int tamanioLista = getListaClientes().size();
         for(int i = 0; i < tamanioLista; i++){
             Empleado empleado = getListaEmpleados().get(i);
