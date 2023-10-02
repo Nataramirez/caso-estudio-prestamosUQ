@@ -53,19 +53,22 @@ public class Main {
         System.out.println("\n--------> Lista de clientes <-------\n");
         mostrarInformacionClientes(prestamoUq);
         eliminarCliente(prestamoUq, "1095");
-        System.out.println("\n--------> Lista de clientes después de eliminar cliente <-------\n");
+        actualizarCiente(prestamoUq,"1097");
+        System.out.println("\n--------> Lista de clientes después de eliminar y actualizar clientes <-------\n");
         mostrarInformacionClientes(prestamoUq);
 
         System.out.println("\n--------> Lista de empleados <-------\n");
         mostrarInformacionEmpleados(prestamoUq);
         eliminarEmpleado(prestamoUq, "1095");
-        System.out.println("\n--------> Lista de empleados después de eliminar empleado <-------\n");
+        actualizarEmpleado(prestamoUq,"1098");
+        System.out.println("\n--------> Lista de empleados después de eliminar y actualizar empleados <-------\n");
         mostrarInformacionEmpleados(prestamoUq);
 
         System.out.println("\n--------> Lista de prestamos <-------\n");
         mostrarInformacionPrestamos(prestamoUq);
         eliminarPrestamo(prestamoUq, 10);
-        System.out.println("\n--------> Lista de prestamos después de eliminar un prestamo <-------\n");
+        actualizarPrestamo(prestamoUq,15);
+        System.out.println("\n--------> Lista de prestamos después de eliminar y actualizar prestamos <-------\n");
         mostrarInformacionPrestamos(prestamoUq);
     }
 
@@ -193,5 +196,32 @@ public class Main {
         return prestamoUq;
     }
 
+    //ACTUALIZAR//
 
+    /**
+     * Método para actualizar datos de un cliente, a partir de la cédula.
+     * @param prestamoUq
+     * @param cedula
+     */
+    private static void actualizarCiente(PrestamoUq prestamoUq, String cedula) {
+        prestamoUq.actualizarCliente(cedula);
+    }
+
+    /**
+     * Método para actualizar datos de un empleado, a partir de la cédula.
+     * @param prestamoUq
+     * @param cedula
+     */
+    private static void actualizarEmpleado(PrestamoUq prestamoUq, String cedula) {
+        prestamoUq.actualizarEmpleado(cedula);
+    }
+
+    /**
+     * Método para actualizar datos de un préstamo, a partir del número de préstamo.
+     * @param prestamoUq
+     * @param numeroPrestamo
+     */
+    private static void actualizarPrestamo(PrestamoUq prestamoUq, int numeroPrestamo) {
+        prestamoUq.actualizarPrestamo(numeroPrestamo);
+    }
 }
