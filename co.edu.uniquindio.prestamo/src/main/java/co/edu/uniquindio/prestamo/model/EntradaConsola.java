@@ -145,15 +145,25 @@ public class EntradaConsola {
         if(proceso.equals(Proceso.CLIENTE.getNombre())){
             String cedula = JOptionPane.showInputDialog("Ingrese cedula del cliente que desea eliminar");
             if (cedula != null){
-                PrestamoUq.eliminarCliente(cedula);
-                JOptionPane.showMessageDialog(null,"El cliente ha sido eliminado");
+                boolean clienteEliminado = PrestamoUq.eliminarCliente(cedula);
+                if (clienteEliminado){
+                    JOptionPane.showMessageDialog(null,"El cliente ha sido eliminado");
+                }else {
+                    JOptionPane.showMessageDialog(null,"El cliente NO ha ha sido encontrado");
+                }
+
             }
         }
         if(proceso.equals(Proceso.EMPLEADO.getNombre())){
             String cedula = JOptionPane.showInputDialog("Ingrese cedula del empleado que desea eliminar");
             if(cedula != null){
-                PrestamoUq.eliminarEmpleado(cedula);
-                JOptionPane.showMessageDialog(null,"El empleado ha sido eliminado");
+                boolean empleadoEliminado = PrestamoUq.eliminarEmpleado(cedula);
+                if(empleadoEliminado){
+                    JOptionPane.showMessageDialog(null,"El empleado ha sido eliminado");
+                }else {
+                    JOptionPane.showMessageDialog(null,"El empleado NO ha ha sido encontrado");
+                }
+
             }
         }
         return cerrar;

@@ -64,15 +64,18 @@ public class PrestamoUq {
      * Método para eliminar un cliente de la lista
      * @param cedula
      */
-    public static void eliminarCliente(String cedula) {
+    public static boolean eliminarCliente(String cedula) {
+        boolean clienteEliminado = false;
         int tamanioLista = getListaClientes().size();
         for(int i = 0; i < tamanioLista; i++){
             Cliente cliente = getListaClientes().get(i);
             if(cliente.getCedula().equalsIgnoreCase(cedula)){
                 getListaClientes().remove(i);
+                clienteEliminado = true;
                 break;
             }
         }
+        return clienteEliminado;
     }
 
     /**
@@ -150,15 +153,18 @@ public class PrestamoUq {
      * Método para eliminar un empleado de la lista
      * @param cedula
      */
-    public static void eliminarEmpleado(String cedula) {
+    public static boolean eliminarEmpleado(String cedula) {
         int tamanioLista = getListaClientes().size();
+        boolean empleadoExiste = false;
         for(int i = 0; i < tamanioLista; i++){
             Empleado empleado = getListaEmpleados().get(i);
             if(empleado.getCedula().equalsIgnoreCase(cedula)){
                 getListaEmpleados().remove(i);
+                empleadoExiste = true;
                 break;
             }
         }
+        return empleadoExiste;
     }
 
     // LISTA PRESTAMOS //
