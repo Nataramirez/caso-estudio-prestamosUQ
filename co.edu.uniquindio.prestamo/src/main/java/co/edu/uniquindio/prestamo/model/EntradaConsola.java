@@ -6,6 +6,9 @@ import co.edu.uniquindio.prestamo.enums.Proceso;
 import javax.swing.*;
 import java.util.List;
 
+/**
+ * Método para seleccionar el tipo de proceso que desea gestionar el usuario
+ */
 public class EntradaConsola {
     public static String tipoProceso(){
         String proceso = (String) JOptionPane.showInputDialog(
@@ -18,6 +21,11 @@ public class EntradaConsola {
         return proceso;
     }
 
+    /**
+     * Método para el tipo de acción a ejecutar, CREAR, LEER, ACTUALIZAR O ELIMINAR
+     * @param proceso
+     * @return
+     */
     public static String tipoCrud(String proceso){
         String resp = (String) JOptionPane.showInputDialog(
                 null,
@@ -29,6 +37,11 @@ public class EntradaConsola {
         return resp;
     }
 
+    /**
+     * Método para crear de acuerdo al proceso seleccionado
+     * @param proceso
+     * @return
+     */
     public static int crear(String proceso){
         int cerrar = 1;
         if(proceso.equals(Proceso.CLIENTE.getNombre())){
@@ -61,6 +74,9 @@ public class EntradaConsola {
                     cerrarAplicacionEnCedula = cerrarApliacionString(cedula);
                 }
                 Double edad = Double.parseDouble(JOptionPane.showInputDialog("Ingrese edad del cliente"));
+                if(edad == null){
+                    edad = Double.parseDouble(JOptionPane.showInputDialog("Ingrese un número para la edad del cliente"));
+                }
                 int cerrarAplicacionEnEdad = cerrarApliacionDouble(edad);
                 if(cerrarAplicacionEnEdad == 0){
                     cerrar = cerrarAplicacionEnEdad;
@@ -70,6 +86,7 @@ public class EntradaConsola {
                     cerrarAplicacionEnEdad = cerrarApliacionDouble(edad);
                 }
                 PrestamoUq.crearCliente(nombre,apellido, cedula, edad);
+                JOptionPane.showMessageDialog(null,"El cliente se ha creado con éxito");
                 cerrar = cerrarAplicacion();
                 return cerrar;
             }
@@ -114,6 +131,7 @@ public class EntradaConsola {
                     cerrarAplicacionEnEdad = cerrarApliacionDouble(edad);
                 }
                 PrestamoUq.crearEmpleado(nombre,apellido, cedula, edad);
+                JOptionPane.showMessageDialog(null,"El empleado se ha creado con éxito");
                 cerrar = cerrarAplicacion();
                 return cerrar;
             }
@@ -157,6 +175,7 @@ public class EntradaConsola {
                     cerrarAplicacionDescripcion = cerrarApliacionString(descripcion);
                 }
                 PrestamoUq.crearPrestamo(numeroPrestamo, fechaPrestamo, fechaEntrega, descripcion);
+                JOptionPane.showMessageDialog(null,"El prestamo se ha creado con éxito");
                 cerrar = cerrarAplicacion();
                 return cerrar;
             }
@@ -164,6 +183,11 @@ public class EntradaConsola {
         return cerrar;
     }
 
+    /**
+     * Método para leer de acuerdo al proceso seleccionado
+     * @param proceso
+     * @return
+     */
     public static int leer(String proceso){
         int cerrar = 1;
         if(proceso.equals(Proceso.CLIENTE.getNombre())){
@@ -191,6 +215,11 @@ public class EntradaConsola {
         return cerrar;
     }
 
+    /**
+     * Método para Eliminar de acuerdo al proceso seleccionado
+     * @param proceso
+     * @return
+     */
     public static int eliminar(String proceso){
         int cerrar = 1;
         if(proceso.equals(Proceso.CLIENTE.getNombre())){
@@ -232,6 +261,39 @@ public class EntradaConsola {
         return cerrar;
     }
 
+    /**
+     * Método para actualizar de acuerdo al proceso seleccionado
+     * @param proceso
+     * @return
+     */
+    public static int actualizar(String proceso){
+        int cerrar = 1;
+        if(proceso.equals(Proceso.CLIENTE.getNombre())){
+            String cedula = JOptionPane.showInputDialog("Ingrese cedula del cliente que desea actualizar");
+            if(cedula != null){
+                PrestamoUq.ActualizarCliente2(cedula);
+            }
+        }
+        if(proceso.equals(Proceso.EMPLEADO.getNombre())){
+            String cedula = JOptionPane.showInputDialog("Ingrese cedula del empleado que desea actualizar");
+            if(cedula != null){
+                PrestamoUq.actualizarEmpleado2(cedula);
+            }
+        }
+        if(proceso.equals(Proceso.PRESTAMO.getNombre())){
+            Integer prestamo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese número de préstamo que desea actualizar"));
+            if(prestamo != null){
+                PrestamoUq.actualizarPrestamo2(prestamo);
+            }
+        }
+        return cerrar;
+    }
+
+    /**
+     * Método para validar input de tipo String por consola
+     * @param accion
+     * @return
+     */
     public static int cerrarApliacionString(String accion){
         int cerrar = 1;
         if(accion instanceof String){
@@ -247,6 +309,11 @@ public class EntradaConsola {
         }
     }
 
+    /**
+     * Método para validar input de tipo Double por consola
+     * @param dato
+     * @return
+     */
     public static int cerrarApliacionDouble(Double dato){
         int cerrar = 1;
         if(dato instanceof Double){
@@ -262,6 +329,11 @@ public class EntradaConsola {
         }
     }
 
+    /**
+     * Método para validar input de tipo Integer por consola
+     * @param dato
+     * @return
+     */
     public static int cerrarApliacionInt(Integer dato){
         int cerrar = 1;
         if(dato instanceof Integer){
@@ -277,6 +349,10 @@ public class EntradaConsola {
         }
     }
 
+    /**
+     * Método para cerrar la aplicación
+     * @return
+     */
     public static int cerrarAplicacion(){
         int respuestaCerrar = JOptionPane.showConfirmDialog(null,
                     "¿Desea cerrar la aplicación?",

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.prestamo.model;
 import co.edu.uniquindio.prestamo.model.Cliente;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -104,7 +105,7 @@ public class PrestamoUq {
      * @param cedula
      * @return
      */
-    public Cliente actualizarCliente(String cedula) {
+    public static Cliente actualizarCliente(String cedula) {
         int tamanioLista = getListaClientes().size();
         String nombre;
         String apellido;
@@ -115,7 +116,7 @@ public class PrestamoUq {
             if (cliente.getCedula().equalsIgnoreCase(cedula)) {
                 Scanner teclado = new Scanner(System.in);
                 System.out.print("Introduzca el nombre actualizado del cliente: ");
-                nombre = teclado.nextLine();
+                nombre = JOptionPane.showInputDialog("Ingrese nombre del cliente");;
                 cliente.setNombre(nombre);
                 System.out.print("Introduzca el apellido actualizado del cliente: ");
                 apellido = teclado.nextLine();
@@ -132,11 +133,70 @@ public class PrestamoUq {
     }
 
     /**
+     * Método para actualizar cliente
+     * @param cedula
+     * @return
+     */
+    public static int ActualizarCliente2(String cedula){
+        int tamanioLista = getListaClientes().size();
+        String nombre;
+        String apellido;
+        Double edad;
+        int cerrar = 1;
+        Cliente cliente;
+        boolean bandera = false;
+        for (int i = 0; i < tamanioLista; i++) {
+            cliente = getListaClientes().get(i);
+            if (cliente.getCedula().equalsIgnoreCase(cedula)) {
+                bandera = true;
+                while(cerrar == 1){
+                    nombre = JOptionPane.showInputDialog("Ingrese el nombre actualizado del cliente");
+                    int cerrarAplicacionEnNombre = EntradaConsola.cerrarApliacionString(nombre);
+                    if(cerrarAplicacionEnNombre == 0){
+                        cerrar = cerrarAplicacionEnNombre;
+                        return cerrar;
+                    } else if (cerrarAplicacionEnNombre == 1 && nombre == null) {
+                        nombre = JOptionPane.showInputDialog("Ingrese el nombre actualizado del cliente");
+                        cerrarAplicacionEnNombre = EntradaConsola.cerrarApliacionString(nombre);
+                    }
+                    apellido = JOptionPane.showInputDialog("Ingrese el apellido actualizado del cliente");
+                    int cerrarAplicacionEnApellido = EntradaConsola.cerrarApliacionString(apellido);
+                    if(cerrarAplicacionEnApellido == 0){
+                        cerrar = cerrarAplicacionEnApellido;
+                        return cerrar;
+                    } else if (cerrarAplicacionEnApellido == 1 && apellido == null) {
+                        apellido = JOptionPane.showInputDialog("Ingrese el apellido actualizado del cliente");
+                        cerrarAplicacionEnApellido = EntradaConsola.cerrarApliacionString(apellido);
+                    }
+                    edad = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la edad actualizada del cliente"));
+                    int cerrarAplicacionEnEdad = EntradaConsola.cerrarApliacionDouble(edad);
+                    if(cerrarAplicacionEnEdad == 0){
+                        cerrar = cerrarAplicacionEnEdad;
+                        return cerrar;
+                    } else if (cerrarAplicacionEnEdad == 1 && edad == null) {
+                        edad = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la edad actualizada del cliente"));
+                        cerrarAplicacionEnEdad = EntradaConsola.cerrarApliacionDouble(edad);
+                    }
+                    cliente.setNombre(nombre);
+                    cliente.setApellido(apellido);
+                    cliente.setEdad(edad);
+                    cerrar = 0;
+                    JOptionPane.showMessageDialog(null,"El cliente ha sido actualizado con exito");
+                }
+            }
+        }
+        if(!bandera){
+            JOptionPane.showMessageDialog(null,"El cliente NO fue econtrado");
+        }
+        return cerrar;
+    }
+
+    /**
      * Método para actualizar los datos de un empleado, a partir de la cédula.
      * @param cedula
      * @return
      */
-    public Empleado actualizarEmpleado(String cedula) {
+    public static Empleado actualizarEmpleado(String cedula) {
         int tamanioLista = getListaEmpleados().size();
         String nombre;
         String apellido;
@@ -164,11 +224,70 @@ public class PrestamoUq {
     }
 
     /**
+     * método para actulizar empleado
+     * @param cedula
+     * @return
+     */
+    public static int actualizarEmpleado2(String cedula){
+        int tamanioLista = getListaEmpleados().size();
+        String nombre;
+        String apellido;
+        Double edad;
+        int cerrar = 1;
+        Empleado empleado;
+        boolean bandera = false;
+        for (int i = 0; i < tamanioLista; i++) {
+            empleado = getListaEmpleados().get(i);
+            if (empleado.getCedula().equalsIgnoreCase(cedula)) {
+                bandera = true;
+                while(cerrar == 1){
+                    nombre = JOptionPane.showInputDialog("Ingrese el nombre actualizado del empleado");
+                    int cerrarAplicacionEnNombre = EntradaConsola.cerrarApliacionString(nombre);
+                    if(cerrarAplicacionEnNombre == 0){
+                        cerrar = cerrarAplicacionEnNombre;
+                        return cerrar;
+                    } else if (cerrarAplicacionEnNombre == 1 && nombre == null) {
+                        nombre = JOptionPane.showInputDialog("Ingrese el nombre actualizado del empleado");
+                        cerrarAplicacionEnNombre = EntradaConsola.cerrarApliacionString(nombre);
+                    }
+                    apellido = JOptionPane.showInputDialog("Ingrese el apellido actualizado del empleado");
+                    int cerrarAplicacionEnApellido = EntradaConsola.cerrarApliacionString(apellido);
+                    if(cerrarAplicacionEnApellido == 0){
+                        cerrar = cerrarAplicacionEnApellido;
+                        return cerrar;
+                    } else if (cerrarAplicacionEnApellido == 1 && apellido == null) {
+                        apellido = JOptionPane.showInputDialog("Ingrese el apellido actualizado del empleado");
+                        cerrarAplicacionEnApellido = EntradaConsola.cerrarApliacionString(apellido);
+                    }
+                    edad = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la edad actualizada del empleado"));
+                    int cerrarAplicacionEnEdad = EntradaConsola.cerrarApliacionDouble(edad);
+                    if(cerrarAplicacionEnEdad == 0){
+                        cerrar = cerrarAplicacionEnEdad;
+                        return cerrar;
+                    } else if (cerrarAplicacionEnEdad == 1 && edad == null) {
+                        edad = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la edad actualizada del empleado"));
+                        cerrarAplicacionEnEdad = EntradaConsola.cerrarApliacionDouble(edad);
+                    }
+                    empleado.setNombre(nombre);
+                    empleado.setApellido(apellido);
+                    empleado.setEdad(edad);
+                    cerrar = 0;
+                    JOptionPane.showMessageDialog(null,"El empleado ha sido actualizado con exito");
+                }
+            }
+        }
+        if(!bandera){
+            JOptionPane.showMessageDialog(null,"El empleado NO fue econtrado");
+        }
+        return cerrar;
+    }
+
+    /**
      * Método para actualizar los datos de un prestamo, a partir del número de préstamo.
      * @param numeroPrestamo
      * @return
      */
-    public Prestamo actualizarPrestamo(int numeroPrestamo) {
+    public static Prestamo actualizarPrestamo(int numeroPrestamo) {
         int tamanioLista = getListaPrestamos().size();
         String fechaPrestamo;
         String fechaEntrega;
@@ -193,6 +312,65 @@ public class PrestamoUq {
                 System.out.println("El préstamo no se puede actualizar porque no existe.");
         }
         return prestamoActualizado;
+    }
+
+    /**
+     * Método para actualizar prestamo
+     * @param numeroPrestamo
+     * @return
+     */
+    public static int actualizarPrestamo2(int numeroPrestamo){
+        int tamanioLista = getListaPrestamos().size();
+        String fechaPrestamo;
+        String fechaEntrega;
+        String descripcion;
+        int cerrar = 1;
+        Prestamo prestamo;
+        boolean bandera = false;
+        for (int i = 0; i < tamanioLista; i++) {
+            prestamo = getListaPrestamos().get(i);
+            if (prestamo.getNumeroPrestamo() == numeroPrestamo) {
+                bandera = true;
+                while(cerrar == 1){
+                    fechaPrestamo = JOptionPane.showInputDialog("Ingrese el fechaPrestamo actualizado del prestamo");
+                    int cerrarAplicacionFechaPrestamo = EntradaConsola.cerrarApliacionString(fechaPrestamo);
+                    if(cerrarAplicacionFechaPrestamo == 0){
+                        cerrar = cerrarAplicacionFechaPrestamo;
+                        return cerrar;
+                    } else if (cerrarAplicacionFechaPrestamo == 1 && fechaPrestamo == null) {
+                        fechaPrestamo = JOptionPane.showInputDialog("Ingrese el fechaPrestamo actualizado del prestamo");
+                        cerrarAplicacionFechaPrestamo = EntradaConsola.cerrarApliacionString(fechaPrestamo);
+                    }
+                    fechaEntrega = JOptionPane.showInputDialog("Ingrese el fechaEntrega actualizado del prestamo");
+                    int cerrarAplicacionFechaEntrega = EntradaConsola.cerrarApliacionString(fechaEntrega);
+                    if(cerrarAplicacionFechaEntrega == 0){
+                        cerrar = cerrarAplicacionFechaEntrega;
+                        return cerrar;
+                    } else if (cerrarAplicacionFechaEntrega == 1 && fechaEntrega == null) {
+                        fechaEntrega = JOptionPane.showInputDialog("Ingrese el fechaEntrega actualizado del prestamo");
+                        cerrarAplicacionFechaEntrega = EntradaConsola.cerrarApliacionString(fechaEntrega);
+                    }
+                    descripcion = JOptionPane.showInputDialog(JOptionPane.showInputDialog("Ingrese la descripcion actualizada del prestamo"));
+                    int cerrarAplicacionDescripcion = EntradaConsola.cerrarApliacionString(descripcion);
+                    if(cerrarAplicacionDescripcion == 0){
+                        cerrar = cerrarAplicacionDescripcion;
+                        return cerrar;
+                    } else if (cerrarAplicacionDescripcion == 1 && descripcion == null) {
+                        descripcion = JOptionPane.showInputDialog(JOptionPane.showInputDialog("Ingrese la descripcion actualizada del prestamo"));
+                        cerrarAplicacionDescripcion = EntradaConsola.cerrarApliacionString(descripcion);
+                    }
+                    prestamo.setFechaPrestamo(fechaPrestamo);
+                    prestamo.setFechaEntrega(fechaEntrega);
+                    prestamo.setDescripcion(descripcion);
+                    cerrar = 0;
+                    JOptionPane.showMessageDialog(null,"El prestamo ha sido actualizado con exito");
+                }
+            }
+        }
+        if(!bandera){
+            JOptionPane.showMessageDialog(null,"El prestamo NO fue econtrado");
+        }
+        return cerrar;
     }
 
     /**
