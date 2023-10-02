@@ -55,20 +55,16 @@ public class Main {
         System.out.println("\n--------> Lista de clientes <-------\n");
         mostrarInformacionClientes(prestamoUq);
         eliminarCliente(prestamoUq, "1095");
-        actualizarCiente(prestamoUq,"1097");
         System.out.println("\n--------> Lista de clientes después de eliminar y actualizar clientes <-------\n");
         mostrarInformacionClientes(prestamoUq);
-
         System.out.println("\n--------> Lista de empleados <-------\n");
         mostrarInformacionEmpleados(prestamoUq);
         eliminarEmpleado(prestamoUq, "1095");
-        actualizarEmpleado(prestamoUq,"1098");
         System.out.println("\n--------> Lista de empleados después de eliminar y actualizar empleados <-------\n");
         mostrarInformacionEmpleados(prestamoUq);
         System.out.println("\n--------> Lista de prestamos <-------\n");
         mostrarInformacionPrestamos(prestamoUq);
         eliminarPrestamo(prestamoUq, 10);
-        actualizarPrestamo(prestamoUq,15);
         System.out.println("\n--------> Lista de prestamos después de eliminar y actualizar prestamos <-------\n");
         mostrarInformacionPrestamos(prestamoUq);
         int ejecutarAplicacion = 1;
@@ -191,6 +187,12 @@ public class Main {
     }
 
 
+    /**
+     * Método para llamar el tipo de CRUD de acuerdo al proceso
+     * @param proceso
+     * @param crud
+     * @return
+     */
     private static int ejecutarCrud(String proceso, String crud){
         int cerrarAplicacion = 1;
         if(crud.contains(Crud.CREATE.getNombre())){
@@ -202,10 +204,10 @@ public class Main {
         if(crud.contains(Crud.DELETE.getNombre())){
             cerrarAplicacion = EntradaConsola.eliminar(proceso);
         }
-        /*
+        if(crud.contains(Crud.UPDATE.getNombre())){
+            cerrarAplicacion = EntradaConsola.actualizar(proceso);
+        }
 
-        if(crud.contains(Crud.UPDATE.getNombre())){}
-        */
         return cerrarAplicacion;
     }
 
